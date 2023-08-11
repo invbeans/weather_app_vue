@@ -8,37 +8,59 @@ let weatherConfig = {
     },
     params: {
         'q': ''
-    }
+    },
+
 }
 
 export const searchByLocsModule = {
     state: () => ({
         searchQuery: '',
-        apiResponse: {}
+        localityWeather: undefined,
+        foundLocalities: [],
+        chosenLocality: undefined
     }),
     mutations: {
         setSearchQuery(state, searchQuery) {
             state.searchQuery = searchQuery
         },
-        setApiResponse(state, apiResponse) {
-            state.apiResponse = new CurrentWeather(apiResponse.location.localtime,
-                apiResponse.current.temp_c,
-                apiResponse.current.condition.text,
-                apiResponse.current.condition.icon,
-                apiResponse.current.wind_kph,
-                apiResponse.current.wind_dir,
-                apiResponse.current.pressure_mb,
-                apiResponse.current.humidity,
-                apiResponse.current.feelslike_c
+        setLocalityWeather(state, localityWeather) {
+            state.localityWeather = new CurrentWeather(
+                localityWeather.location.name,
+                localityWeather.location.localtime,
+                localityWeather.current.temp_c,
+                localityWeather.current.condition.text,
+                localityWeather.current.condition.icon,
+                localityWeather.current.wind_kph,
+                localityWeather.current.wind_dir,
+                localityWeather.current.pressure_mb,
+                localityWeather.current.humidity,
+                localityWeather.current.feelslike_c
                 )
+        },
+        setFoundLocalities(state, foundLocalities){
+            state.foundLocalities = foundLocalities
+        },
+        setChosenLocality(state, chosenLocality){
+            state.chosenLocality = chosenLocality
         }
     },
     actions: {
-        async searchWeather({ state, commit }) {
+        async searchLocation({ state, commit }) {
             try {
                 weatherConfig.params.q = state.searchQuery
+                const response = await axios.get('https://weatherapi-com.p.rapidapi.com/search.json', weatherConfig)
+                commit('setFoundLocalities', response.data)
+            }
+            catch (e) {
+                console.log(e)
+            }
+        },
+        async searchWeatherByLatLong({ state, commit }) {
+            try {
+                weatherConfig.params.q = state.chosenLocality.lat + "," +  state.chosenLocality.lon
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/current.json', weatherConfig)
-                commit('setApiResponse', response.data)
+                commit('setLocalityWeather', response.data)
+                console.log(state.localityWeather)
             }
             catch (e) {
                 console.log(e)

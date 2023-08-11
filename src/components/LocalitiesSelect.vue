@@ -1,0 +1,31 @@
+<template>
+    <select @change="changeOption" v-model="selected">
+        <option disabled value="">{{ selectName }}</option>
+        <localities-option v-for="option in elements" :item="option" :key="option.id"></localities-option>
+    </select>
+</template>
+
+<script>
+import LocalitiesOption from './LocalitiesOption.vue';
+export default {
+    name: 'localities-select',
+    components: {
+        LocalitiesOption
+    },
+    props: {
+        selectName: [String],
+        elements: [Array]
+    },
+    data: () => ({
+        selected: ''
+    }),
+    methods: {
+        changeOption(){
+            this.$emit('change:item', this.selected)
+        }
+    }
+    
+}
+</script>
+
+<style scoped lang="scss"></style>

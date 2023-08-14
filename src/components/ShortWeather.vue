@@ -5,6 +5,8 @@
             <img :src="fetchedWeather.icon" alt="weather icon" class="weather-icon">
         </div>
         <p>{{ fetchedWeather.temp_c }}</p>
+        <p>{{ fetchedWeather.text }}</p>
+        <p>{{ fetchedWeather.localtime }}</p>
     </div>
 </template>
 
@@ -20,6 +22,6 @@ export default {
 
 <style scoped lang="scss">
 .weather-icon {
-    max-width: 30vw;
+    max-width: 20vw;
 }
 </style>

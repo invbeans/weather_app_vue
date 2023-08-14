@@ -8,7 +8,6 @@
 <script>
 import LocalitiesOption from './LocalitiesOption.vue';
 export default {
-    name: 'localities-select',
     components: {
         LocalitiesOption
     },
@@ -28,4 +27,20 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+select {
+    height: 5vh;
+    width: 50vw;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+option {
+    height: 5vh;
+    width: 50vw;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+</style>

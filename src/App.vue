@@ -1,6 +1,6 @@
 <template>
+  <NavbarComponent></NavbarComponent>
   <div class="app">
-    <NavbarComponent></NavbarComponent>
     <router-view></router-view>
   </div>
 </template>
@@ -16,5 +16,15 @@ export default {
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
 
+.app {
+  padding: 20px;
+}
 </style>

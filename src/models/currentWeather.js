@@ -3,7 +3,7 @@ export default class CurrentWeather {
         icon, wind_kph, wind_dir, pressure_mb,
         humidity, feelslike_c) {
             this.name = name
-            this.localtime = localtime
+            this.localtime = localtime.split(' ')[0]
             this.temp_c = temp_c
             this.text = text
             this.icon = "https:" + icon

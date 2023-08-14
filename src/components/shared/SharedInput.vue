@@ -16,4 +16,12 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+input {
+    height: 5vh;
+    width: 50vw;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+</style>

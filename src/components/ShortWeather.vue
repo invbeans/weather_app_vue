@@ -4,7 +4,7 @@
         <div class="short-info">
             <img :src="fetchedWeather.icon" alt="weather icon" class="weather-icon">
         </div>
-        <p>{{ fetchedWeather.temp_c }}</p>
+        <p>{{ fetchedTemp }}</p>
         <p>{{ fetchedWeather.text }}</p>
         <p>{{ fetchedWeather.localtime }}</p>
     </div>
@@ -16,6 +16,11 @@ import CurrentWeather from '@/models/currentWeather';
 export default {
     props: {
         fetchedWeather: [CurrentWeather, undefined]
+    },
+    computed: {
+        fetchedTemp() {
+            return this.fetchedWeather.temp_c + '°C'
+        }
     }
 }
 </script>

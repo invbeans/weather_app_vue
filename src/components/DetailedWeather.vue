@@ -40,4 +40,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vh;
+}
 </style>

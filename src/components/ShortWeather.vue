@@ -29,4 +29,10 @@ export default {
 .weather-icon {
     max-width: 20vw;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vh;
+}
 </style>

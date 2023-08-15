@@ -1,24 +1,31 @@
 <template>
     <div class="wrapper">
         <div class="input-container">
-            <shared-input :input-value="searchQuery" @update:input-value="setSearchQuery" @keyup.enter="searchLocation"></shared-input>
+            <shared-input :input-value="searchQuery" @update:input-value="setSearchQuery"
+                @keyup.enter="searchLocation"></shared-input>
             <shared-button @click="searchLocation">Найти погоду</shared-button>
         </div>
         <div class="found-localities">
             <localities-select v-if="foundLocalities.length !== 0" @change:item="checkWhat" :selectName="selectName"
                 :elements="foundLocalities"></localities-select>
         </div>
-        <div class="weather-blocks" v-if="localityWeather !== undefined">
-            <shared-weather-block :imageURL='shortBlockBg'>
-                <short-weather :fetchedWeather="localityWeather">
-                </short-weather>
-            </shared-weather-block>
-            <shared-weather-block :imageURL='detailedBlockBg'>
-                <detailed-weather :fetchedWeather="localityWeather">
-                </detailed-weather>
-            </shared-weather-block>
-        </div>
-        <p v-else>Погода подгружается...</p>
+        <transition name="fade">
+            <div class="weather-blocks" v-if="localityWeather !== undefined">
+                <shared-weather-block :imageURL='shortBlockBg'>
+                    <short-weather :fetchedWeather="localityWeather">
+                    </short-weather>
+                </shared-weather-block>
+                <shared-weather-block :imageURL='detailedBlockBg'>
+                    <detailed-weather :fetchedWeather="localityWeather">
+                    </detailed-weather>
+                </shared-weather-block>
+                <shared-weather-block class="col-span" :imageURL='forecastBlockBg'>
+                    <p>я настоящий гуль все остальные фейки зылвазщшпшх</p>
+                </shared-weather-block>
+            </div>
+            <p v-else>Выберите населенный пункт...</p>
+        </transition>
+        
     </div>
 </template>
 
@@ -47,7 +54,8 @@ export default {
             { id: 1, title: 'Animals' }
         ],
         shortBlockBg: 'https://i.pinimg.com/1200x/06/ba/d9/06bad9fbdbabf49d9cf6c95a2715d1ed.jpg',
-        detailedBlockBg: 'https://png.pngtree.com/background/20211215/original/pngtree-modern-abstract-elegant-colorful-color-background-picture-image_1453648.jpg'
+        detailedBlockBg: 'https://png.pngtree.com/background/20211215/original/pngtree-modern-abstract-elegant-colorful-color-background-picture-image_1453648.jpg',
+        forecastBlockBg: 'https://png.pngtree.com/background/20210709/original/pngtree-wave-point-pink-shading-banner-picture-image_912886.jpg'
     }),
     methods: {
         ...mapMutations({
@@ -84,14 +92,16 @@ export default {
     flex-direction: column;
     align-items: center;
 }
+
 .found-localities {
     height: 10vh;
-    width: 100%;
+    width: 80%;
     align-items: center;
     display: flex;
 }
+
 .input-container {
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-items: baseline;
     gap: 2vw;
@@ -104,5 +114,20 @@ export default {
     display: grid;
     padding-top: 2vh;
     grid-template-columns: 1fr 1fr;
+    column-gap: 2vw;
+    row-gap: 3vh;
 }
-</style>
+
+.col-span {
+    grid-column: span 2;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}</style>

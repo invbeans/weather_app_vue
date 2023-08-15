@@ -39,6 +39,7 @@ export const searchByLocsModule = {
         },
         setFoundLocalities(state, foundLocalities){
             state.foundLocalities = foundLocalities
+            state.localityWeather = undefined
         },
         setChosenLocality(state, chosenLocality){
             state.chosenLocality = chosenLocality

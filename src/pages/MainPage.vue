@@ -6,7 +6,7 @@
             <shared-button @click="searchLocation">Найти погоду</shared-button>
         </div>
         <div class="found-localities">
-            <localities-select v-if="foundLocalities.length !== 0" @change:item="checkWhat" :selectName="selectName"
+            <localities-select v-if="foundLocalities.length !== 0" @change:item="findByLatLong" :selectName="selectName"
                 :elements="foundLocalities"></localities-select>
         </div>
         <transition name="fade">
@@ -19,8 +19,8 @@
                     <detailed-weather :fetchedWeather="localityWeather">
                     </detailed-weather>
                 </shared-weather-block>
-                <shared-weather-block class="col-span" :imageURL='forecastBlockBg'>
-                    <p>я настоящий гуль все остальные фейки зылвазщшпшх</p>
+                <shared-weather-block class="col-span" v-if="forecastWeather !== undefined" :imageURL='forecastBlockBg'>
+                    <hour-weather :hourWeather="forecastWeather.forecast.forecastday[0].hour"></hour-weather>
                 </shared-weather-block>
             </div>
             <p v-else>Выберите населенный пункт...</p>
@@ -34,25 +34,17 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 import ShortWeather from '@/components/ShortWeather.vue'
 import DetailedWeather from '@/components/DetailedWeather.vue';
 import LocalitiesSelect from '@/components/LocalitiesSelect.vue';
+import HourWeather from '@/components/HourWeather.vue';
 
 export default {
     components: {
         ShortWeather,
         DetailedWeather,
-        LocalitiesSelect
+        LocalitiesSelect,
+        HourWeather
     },
     data: () => ({
         selectName: "Выбор населенного пункта",
-        listInd: [1, 2],
-        items: [
-            { id: 0, title: 'audi', categoryId: 0 },
-            { id: 1, title: 'bmw', categoryId: 0 },
-            { id: 2, title: 'cat', categoryId: 1 }
-        ],
-        categories: [
-            { id: 0, title: 'Cars' },
-            { id: 1, title: 'Animals' }
-        ],
         shortBlockBg: 'https://i.pinimg.com/1200x/06/ba/d9/06bad9fbdbabf49d9cf6c95a2715d1ed.jpg',
         detailedBlockBg: 'https://png.pngtree.com/background/20211215/original/pngtree-modern-abstract-elegant-colorful-color-background-picture-image_1453648.jpg',
         forecastBlockBg: 'https://png.pngtree.com/background/20210709/original/pngtree-wave-point-pink-shading-banner-picture-image_912886.jpg'
@@ -63,21 +55,25 @@ export default {
             setLocalityWeather: 'search/setLocalityWeather',
             setFoundLocalities: 'search/setFoundLocalities',
             setChosenLocality: 'search/setChosenLocality',
+            setForecastWeather: 'search/setForecastWeather'
         }),
         ...mapActions({
             searchWeatherByLatLong: 'search/searchWeatherByLatLong',
-            searchLocation: 'search/searchLocation'
+            searchLocation: 'search/searchLocation',
+            searchForecast: 'search/searchForecast'
         }),
-        checkWhat(value) {
+        findByLatLong(value) {
             this.setChosenLocality(value)
             this.searchWeatherByLatLong()
+            this.searchForecast()
         },
     },
     computed: {
         ...mapState({
             searchQuery: state => state.search.searchQuery,
             localityWeather: state => state.search.localityWeather,
-            foundLocalities: state => state.search.foundLocalities
+            foundLocalities: state => state.search.foundLocalities,
+            forecastWeather: state => state.search.forecastWeather
         })
     }
 

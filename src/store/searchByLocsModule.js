@@ -17,7 +17,8 @@ export const searchByLocsModule = {
         searchQuery: '',
         localityWeather: undefined,
         foundLocalities: [],
-        chosenLocality: undefined
+        chosenLocality: undefined,
+        forecastWeather: undefined
     }),
     mutations: {
         setSearchQuery(state, searchQuery) {
@@ -43,6 +44,9 @@ export const searchByLocsModule = {
         },
         setChosenLocality(state, chosenLocality){
             state.chosenLocality = chosenLocality
+        },
+        setForecastWeather(state, forecastWeather){
+            state.forecastWeather = forecastWeather
         }
     },
     actions: {
@@ -68,6 +72,17 @@ export const searchByLocsModule = {
             }
             finally {
                 commit('setSearchQuery', '')
+            }
+        },
+        async searchForecast({state, commit}) {
+            try {
+                weatherConfig.params.q = state.chosenLocality.lat + "," +  state.chosenLocality.lon
+                const response = await axios.get('https://weatherapi-com.p.rapidapi.com/forecast.json', weatherConfig)
+                commit('setForecastWeather', response.data)
+                console.log(state.forecastWeather)
+            }
+            catch (e) {
+                console.log(e)
             }
         }
     },

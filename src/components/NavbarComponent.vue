@@ -12,13 +12,13 @@ export default {
 .navbar-container {
     height: 7vh;
     width: 100%;
-    background-color: palevioletred;
+    background-color: rgb(50, 147, 143);
     display: flex;
     align-items: center;
 }
 
 .navbar-container p {
-    padding: 10px;
+    padding: 30px;
     color: white;
 }
 </style>

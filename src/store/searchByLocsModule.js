@@ -7,9 +7,8 @@ let weatherConfig = {
         'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
     },
     params: {
-        'q': ''
-    },
-
+        q: ''
+    }
 }
 
 export const searchByLocsModule = {
@@ -55,6 +54,7 @@ export const searchByLocsModule = {
                 weatherConfig.params.q = state.searchQuery
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/search.json', weatherConfig)
                 commit('setFoundLocalities', response.data)
+                weatherConfig.params = {}
             }
             catch (e) {
                 console.log(e)
@@ -65,7 +65,8 @@ export const searchByLocsModule = {
                 weatherConfig.params.q = state.chosenLocality.lat + "," +  state.chosenLocality.lon
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/current.json', weatherConfig)
                 commit('setLocalityWeather', response.data)
-                console.log(state.localityWeather)
+                weatherConfig.params = {}
+                console.log(weatherConfig)
             }
             catch (e) {
                 console.log(e)
@@ -77,9 +78,10 @@ export const searchByLocsModule = {
         async searchForecast({state, commit}) {
             try {
                 weatherConfig.params.q = state.chosenLocality.lat + "," +  state.chosenLocality.lon
+                weatherConfig.params.days = 3
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/forecast.json', weatherConfig)
                 commit('setForecastWeather', response.data)
-                console.log(state.forecastWeather)
+                weatherConfig.params = {}
             }
             catch (e) {
                 console.log(e)

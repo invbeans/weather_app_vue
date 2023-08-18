@@ -17,27 +17,33 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
     props: {
         hourWeather: [Array, undefined]
     },
-    data: () => ({
-        startHour: 0
-    }),
     methods: {
-        leftBtnClick() {
-            this.startHour = (this.startHour <= 0) ? 0 : this.startHour - 1
-        },
-        rightBtnClick() {
-            this.startHour = (this.startHour >= 13) ? 13 : this.startHour + 1
-        }
+        ...mapMutations({
+            setHourWeather: 'slide/setHourWeather',
+            setStartHour: 'slide/setStartHour'
+        }),
+        ...mapActions({
+            leftBtnClick: 'slide/leftBtnClick',
+            rightBtnClick: 'slide/rightBtnClick'
+        })
     },
     computed: {
-        hoursArray () {
-            let sliceEnd = (this.startHour < 14) ? this.startHour + 11 : 24
-            return this.hourWeather.slice(this.startHour, sliceEnd)
-        }
+        ...mapState({
+            hourWeather: state => state.slide.hourWeather,
+            startHour: state => state.slide.startHour
+        }),
+        ...mapGetters({
+            hoursArray: 'slide/hoursArray'
+        })
+    },
+    mounted() {
+        this.setHourWeather(this.hourWeather)
     }
 }
 </script>

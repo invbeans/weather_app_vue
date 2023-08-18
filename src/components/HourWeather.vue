@@ -6,8 +6,10 @@
                 ◃
             </button>
             <div class="hours-weather" v-for="hour in hoursArray" :key="hour.time_epoch">
-                <p>{{ hour.time.split(' ')[1] }}</p>
-                <img :src="'https:' + hour.condition.icon" alt="weather icon" class="weather-icon">
+                <transition-group name="hours-list">
+                    <p>{{ hour.time.split(' ')[1] }}</p>
+                    <img :src="'https:' + hour.condition.icon" alt="weather icon" class="weather-icon">
+                </transition-group>
             </div>
             <button @click="rightBtnClick">
                 ▹
@@ -57,11 +59,31 @@ export default {
     justify-content: space-around;
 }
 
+transition-group {
+    display: flex;
+    flex-direction: row;
+}
+
 button {
     background-color: rgb(99, 218, 214);
     border-radius: 10px;
     border: none;
     width: 3vw;
     height: 4vh;
+}
+
+.hours-list-enter-active,
+.hours-list-leave-active {
+    transition: all 0.2s linear;
+}
+
+.hours-list-enter-from,
+.hours-list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hours-list-move {
+    transition: all 0.2s linear;
 }
 </style>

@@ -19,8 +19,11 @@
                     <detailed-weather :fetchedWeather="localityWeather">
                     </detailed-weather>
                 </shared-weather-block>
-                <shared-weather-block class="col-span" v-if="forecastWeather !== undefined" :imageURL='forecastBlockBg'>
-                    <hour-weather :hourWeather="forecastWeather.forecast.forecastday[0].hour"></hour-weather>
+                <shared-weather-block :imageURL='forecastBlockBg' v-if="forecastWeather !== undefined">
+                    <forecast-weather :forecastWeather="forecastWeather.forecast.forecastday.slice(1)"></forecast-weather>
+                </shared-weather-block>
+                <shared-weather-block class="col-span" v-if="forecastWeather !== undefined" :imageURL='hoursBlockBg'>
+                    <hour-weather :hourWeatherProp="forecastWeather.forecast.forecastday[0].hour"></hour-weather>
                 </shared-weather-block>
             </div>
             <p v-else>Выберите населенный пункт...</p>
@@ -35,19 +38,22 @@ import ShortWeather from '@/components/ShortWeather.vue'
 import DetailedWeather from '@/components/DetailedWeather.vue';
 import LocalitiesSelect from '@/components/LocalitiesSelect.vue';
 import HourWeather from '@/components/HourWeather.vue';
+import ForecastWeather from '@/components/ForecastWeather.vue';
 
 export default {
     components: {
         ShortWeather,
         DetailedWeather,
         LocalitiesSelect,
-        HourWeather
+        HourWeather,
+        ForecastWeather
     },
     data: () => ({
         selectName: "Выбор населенного пункта",
         shortBlockBg: 'https://i.pinimg.com/1200x/06/ba/d9/06bad9fbdbabf49d9cf6c95a2715d1ed.jpg',
         detailedBlockBg: 'https://png.pngtree.com/background/20211215/original/pngtree-modern-abstract-elegant-colorful-color-background-picture-image_1453648.jpg',
-        forecastBlockBg: 'https://png.pngtree.com/background/20210709/original/pngtree-wave-point-pink-shading-banner-picture-image_912886.jpg'
+        hoursBlockBg: 'https://png.pngtree.com/background/20210709/original/pngtree-wave-point-pink-shading-banner-picture-image_912886.jpg',
+        forecastBlockBg: 'https://png.pngtree.com/thumb_back/fh260/background/20190508/pngtree-pink-geometrically-irregular-fluid-background-image_89301.jpg'
     }),
     methods: {
         ...mapMutations({
@@ -109,13 +115,13 @@ export default {
     width: 80%;
     display: grid;
     padding-top: 2vh;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2vw;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1vw;
     row-gap: 3vh;
 }
 
 .col-span {
-    grid-column: span 2;
+    grid-column: span 3;
 }
 
 .fade-enter-active,

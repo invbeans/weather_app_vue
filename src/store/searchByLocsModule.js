@@ -66,7 +66,6 @@ export const searchByLocsModule = {
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/current.json', weatherConfig)
                 commit('setLocalityWeather', response.data)
                 weatherConfig.params = {}
-                console.log(weatherConfig)
             }
             catch (e) {
                 console.log(e)
@@ -81,6 +80,7 @@ export const searchByLocsModule = {
                 weatherConfig.params.days = 3
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/forecast.json', weatherConfig)
                 commit('setForecastWeather', response.data)
+                console.log(state.forecastWeather)
                 weatherConfig.params = {}
             }
             catch (e) {

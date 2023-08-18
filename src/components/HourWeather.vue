@@ -23,7 +23,7 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
     props: {
-        hourWeather: [Array, undefined]
+        hourWeatherProp: [Array, undefined]
     },
     methods: {
         ...mapMutations({
@@ -45,7 +45,7 @@ export default {
         })
     },
     mounted() {
-        this.setHourWeather(this.hourWeather)
+        this.setHourWeather(this.hourWeatherProp)
     }
 }
 </script>

@@ -7,8 +7,10 @@
             </button>
             <div class="hours-weather" v-for="hour in hoursArray" :key="hour.time_epoch">
                 <transition-group name="hours-list">
-                    <p>{{ hour.time.split(' ')[1] }}</p>
-                    <img :src="'https:' + hour.condition.icon" alt="weather icon" class="weather-icon">
+                    <div class="one-hour" :key="hour.time_epoch">
+                        <p>{{ hour.time.split(' ')[1] }}</p>
+                        <img :src="'https:' + hour.condition.icon" alt="weather icon" class="weather-icon">
+                    </div>
                 </transition-group>
             </div>
             <button @click="rightBtnClick">
@@ -51,6 +53,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.container {
+    color: wheat;
+}
+
 .weather-block {
     padding-top: 5vh;
     display: flex;
@@ -65,7 +71,7 @@ transition-group {
 }
 
 button {
-    background-color: rgb(99, 218, 214);
+    background-color: rgb(87, 160, 77);
     border-radius: 10px;
     border: none;
     width: 3vw;

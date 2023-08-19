@@ -12,7 +12,7 @@ export default {
 .navbar-container {
     height: 7vh;
     width: 100%;
-    background-color: rgb(50, 147, 143);
+    background-color: rgb(87, 160, 77);
     display: flex;
     align-items: center;
 }

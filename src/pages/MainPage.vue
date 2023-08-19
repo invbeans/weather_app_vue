@@ -50,10 +50,10 @@ export default {
     },
     data: () => ({
         selectName: "Выбор населенного пункта",
-        shortBlockBg: 'https://i.pinimg.com/1200x/06/ba/d9/06bad9fbdbabf49d9cf6c95a2715d1ed.jpg',
-        detailedBlockBg: 'https://png.pngtree.com/background/20211215/original/pngtree-modern-abstract-elegant-colorful-color-background-picture-image_1453648.jpg',
-        hoursBlockBg: 'https://png.pngtree.com/background/20210709/original/pngtree-wave-point-pink-shading-banner-picture-image_912886.jpg',
-        forecastBlockBg: 'https://png.pngtree.com/thumb_back/fh260/background/20190508/pngtree-pink-geometrically-irregular-fluid-background-image_89301.jpg'
+        shortBlockBg: require('../assets/cut_patchy_rain.png'),
+        detailedBlockBg: require('../assets/snow_field_cut.png'),
+        hoursBlockBg: require('../assets/flowers_cut.png'),
+        forecastBlockBg: require('../assets/luggage_cut.png'),
     }),
     methods: {
         ...mapMutations({

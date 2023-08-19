@@ -80,7 +80,6 @@ export const searchByLocsModule = {
                 weatherConfig.params.days = 3
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/forecast.json', weatherConfig)
                 commit('setForecastWeather', response.data)
-                console.log(state.forecastWeather)
                 weatherConfig.params = {}
             }
             catch (e) {

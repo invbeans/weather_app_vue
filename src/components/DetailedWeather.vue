@@ -44,5 +44,6 @@ export default {
     display: flex;
     flex-direction: column;
     row-gap: 2vh;
+    color: wheat;
 }
 </style>

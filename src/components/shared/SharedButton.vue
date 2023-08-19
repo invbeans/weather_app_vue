@@ -12,11 +12,11 @@ export default {
 
 <style scoped lang="scss">
 button {
-    height: 5vh;
-    width: 10vw;
+    height: 3.5em;
+    width: 10rem;
     min-width: fit-content;
     border: none;
     border-radius: 15px;
-    padding: 10px;
+    padding: 1em 1.5rem;
 }
 </style>

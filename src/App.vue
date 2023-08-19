@@ -25,6 +25,7 @@ export default {
 }
 
 .app {
+  margin-top: 4rem;
   padding: 20px;
 }
 </style>

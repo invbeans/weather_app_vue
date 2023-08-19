@@ -10,7 +10,11 @@ export default {
 </script>
 <style scoped lang="scss">
 .navbar-container {
-    height: 7vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4rem;
     width: 100%;
     background-color: rgb(87, 160, 77);
     display: flex;
@@ -18,7 +22,7 @@ export default {
 }
 
 .navbar-container p {
-    padding: 30px;
+    padding: 3em;
     color: white;
 }
 </style>

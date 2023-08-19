@@ -29,16 +29,14 @@ export default {
 
 <style scoped lang="scss">
 select {
-    height: 5vh;
-    width: 50vw;
+    height: 3.5em;
+    width: 46rem;
     padding: 10px;
     border: 1px solid gray;
     border-radius: 5px;
 }
 
 option {
-    height: 5vh;
-    width: 50vw;
     padding: 10px;
     border: 1px solid gray;
     border-radius: 5px;

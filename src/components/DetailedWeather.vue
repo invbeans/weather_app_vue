@@ -43,7 +43,7 @@ export default {
 .container {
     display: flex;
     flex-direction: column;
-    row-gap: 2vh;
+    row-gap: 1.2em;
     color: wheat;
 }
 </style>

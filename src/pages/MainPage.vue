@@ -1,34 +1,36 @@
 <template>
     <div class="wrapper">
-        <div class="input-container">
-            <shared-input :input-value="searchQuery" @update:input-value="setSearchQuery"
-                @keyup.enter="searchLocation"></shared-input>
-            <shared-button @click="searchLocation">Найти погоду</shared-button>
-        </div>
-        <div class="found-localities">
-            <localities-select v-if="foundLocalities.length !== 0" @change:item="findByLatLong" :selectName="selectName"
-                :elements="foundLocalities"></localities-select>
-        </div>
-        <transition name="fade">
-            <div class="weather-blocks" v-if="localityWeather !== undefined">
-                <shared-weather-block :imageURL='shortBlockBg'>
-                    <short-weather :fetchedWeather="localityWeather">
-                    </short-weather>
-                </shared-weather-block>
-                <shared-weather-block :imageURL='detailedBlockBg'>
-                    <detailed-weather :fetchedWeather="localityWeather">
-                    </detailed-weather>
-                </shared-weather-block>
-                <shared-weather-block :imageURL='forecastBlockBg' v-if="forecastWeather !== undefined">
-                    <forecast-weather :forecastWeather="forecastWeather.forecast.forecastday.slice(1)"></forecast-weather>
-                </shared-weather-block>
-                <shared-weather-block class="col-span" v-if="forecastWeather !== undefined" :imageURL='hoursBlockBg'>
-                    <hour-weather :hourWeatherProp="forecastWeather.forecast.forecastday[0].hour"></hour-weather>
-                </shared-weather-block>
+        <div class="content-wrapper">
+            <div class="input-container">
+                <shared-input :input-value="searchQuery" @update:input-value="setSearchQuery"
+                    @keyup.enter="searchLocation"></shared-input>
+                <shared-button @click="searchLocation">Найти погоду</shared-button>
             </div>
-            <p v-else>Выберите населенный пункт...</p>
-        </transition>
-        
+            <div class="found-localities">
+                <localities-select v-if="foundLocalities.length !== 0" @change:item="findByLatLong" :selectName="selectName"
+                    :elements="foundLocalities"></localities-select>
+            </div>
+            <transition name="fade">
+                <div class="weather-blocks" v-if="localityWeather !== undefined">
+                    <shared-weather-block :imageURL='shortBlockBg'>
+                        <short-weather :fetchedWeather="localityWeather">
+                        </short-weather>
+                    </shared-weather-block>
+                    <shared-weather-block :imageURL='detailedBlockBg'>
+                        <detailed-weather :fetchedWeather="localityWeather">
+                        </detailed-weather>
+                    </shared-weather-block>
+                    <shared-weather-block :imageURL='forecastBlockBg' v-if="forecastWeather !== undefined">
+                        <forecast-weather
+                            :forecastWeather="forecastWeather.forecast.forecastday.slice(1)"></forecast-weather>
+                    </shared-weather-block>
+                    <shared-weather-block class="col-span" v-if="forecastWeather !== undefined" :imageURL='hoursBlockBg'>
+                        <hour-weather :hourWeatherProp="forecastWeather.forecast.forecastday[0].hour"></hour-weather>
+                    </shared-weather-block>
+                </div>
+                <p v-else>Выберите населенный пункт...</p>
+            </transition>
+        </div>
     </div>
 </template>
 
@@ -87,26 +89,35 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .wrapper {
     height: 100%;
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.content-wrapper {
+    height: 100%;
+    width: 90em;
+    padding-left: 4em;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .found-localities {
-    height: 10vh;
+    padding-top: 1.3rem;
+    padding-bottom: 1.3rem;
     width: 80%;
-    align-items: center;
     display: flex;
+    align-items: flex-start;
 }
 
 .input-container {
     width: 80%;
     display: flex;
     justify-items: baseline;
-    gap: 2vw;
+    gap: 2em;
     align-items: flex-start;
 }
 
@@ -114,10 +125,10 @@ export default {
     height: auto;
     width: 80%;
     display: grid;
-    padding-top: 2vh;
+    padding-top: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 1vw;
-    row-gap: 3vh;
+    column-gap: 1rem;
+    row-gap: 1rem;
 }
 
 .col-span {
@@ -132,4 +143,5 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
-}</style>
+}
+</style>

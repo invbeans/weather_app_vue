@@ -58,7 +58,7 @@ export default {
 }
 
 .weather-block {
-    padding-top: 5vh;
+    padding-top: 3em;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -70,12 +70,16 @@ transition-group {
     flex-direction: row;
 }
 
+.one-hour {
+    max-width: 3rem;
+}
+
 button {
     background-color: rgb(87, 160, 77);
     border-radius: 10px;
     border: none;
-    width: 3vw;
-    height: 4vh;
+    width: 2rem;
+    height: 2.5rem;
 }
 
 .hours-list-enter-active,

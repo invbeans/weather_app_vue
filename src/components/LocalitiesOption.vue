@@ -12,9 +12,6 @@ export default {
 
 <style scoped lang="scss">
 optgroup {
-    height: 5vh;
-    width: 50vw;
-    padding: 10px;
     border: 1px solid gray;
     border-radius: 5px;
 }

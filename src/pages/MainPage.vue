@@ -89,13 +89,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .wrapper {
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
 }
+
 .content-wrapper {
     height: 100%;
     width: 90em;
@@ -116,7 +116,6 @@ export default {
 .input-container {
     width: 80%;
     display: flex;
-    justify-items: baseline;
     gap: 2em;
     align-items: flex-start;
 }
@@ -143,5 +142,29 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .content-wrapper {
+        align-items: start;
+        padding-left: 1em;
+    }
+
+    .weather-blocks {
+        grid-template-columns: 1fr;
+        column-gap: 1em;
+        row-gap: 1em;
+        width: 100%;
+        padding-right: 1em;
+    }
+
+    .input-container {
+        gap: 0.5em;
+    }
+
+    .col-span {
+        grid-column: span 1;
+    }
+
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <NavbarComponent></NavbarComponent>
   <div class="app">
+    <NavbarComponent></NavbarComponent>
     <router-view></router-view>
   </div>
 </template>
@@ -16,6 +16,15 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(244, 232, 210);
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -27,5 +36,15 @@ export default {
 .app {
   margin-top: 4rem;
   padding: 20px;
+  height: 100%;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+
+  .app {
+    font-size: 12px;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 </style>

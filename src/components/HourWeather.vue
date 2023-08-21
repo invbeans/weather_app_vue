@@ -96,4 +96,20 @@ button {
 .hours-list-move {
     transition: all 0.2s linear;
 }
+
+@media (max-width: 600px) and (orientation: portrait) {
+
+    button {
+        width: 1em;
+        height: 1.4em;
+    }
+
+    .one-hour {
+        font-size: 6px;
+    }
+
+    img {
+        width: 2em;
+    }
+}
 </style>

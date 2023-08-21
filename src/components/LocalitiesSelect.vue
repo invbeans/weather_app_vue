@@ -41,4 +41,11 @@ option {
     border: 1px solid gray;
     border-radius: 5px;
 }
+
+@media (max-width: 600px) and (orientation: portrait){
+    select {
+        height: 3em;
+        width: 15rem;
+    }
+}
 </style>

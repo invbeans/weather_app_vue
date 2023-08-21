@@ -9,7 +9,7 @@ export default {
         inputValue: [String]
     },
     methods: {
-        updateInputValue(event){
+        updateInputValue(event) {
             this.$emit('update:inputValue', event.target.value)
         }
     }
@@ -23,5 +23,12 @@ input {
     padding: 10px;
     border: 1px solid gray;
     border-radius: 5px;
+}
+
+@media (max-width: 600px) and (orientation: portrait){
+    input {
+        height: 3em;
+        width: 15rem;
+    }
 }
 </style>

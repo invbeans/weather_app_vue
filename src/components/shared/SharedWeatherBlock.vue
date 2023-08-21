@@ -23,4 +23,11 @@ export default {
     padding: 1.2em 1.8rem;
     box-shadow: inset 0.5em 0.5em 2em 1.5em rgba(53, 51, 43, 0.331);
 }
+
+@media (max-width: 600px) and (orientation: portrait){
+    .weather-container {
+        padding: 1.2em 1.8em;
+        min-height: 10rem;
+    }
+}
 </style>

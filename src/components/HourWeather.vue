@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { isMobile } from 'vue-device-detector'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
@@ -30,7 +31,8 @@ export default {
     methods: {
         ...mapMutations({
             setHourWeather: 'slide/setHourWeather',
-            setStartHour: 'slide/setStartHour'
+            setStartHour: 'slide/setStartHour',
+            setAmountHours: 'slide/setAmountHours'
         }),
         ...mapActions({
             leftBtnClick: 'slide/leftBtnClick',
@@ -40,14 +42,25 @@ export default {
     computed: {
         ...mapState({
             hourWeather: state => state.slide.hourWeather,
-            startHour: state => state.slide.startHour
+            startHour: state => state.slide.startHour,
+            amountHours: state => state.amountHours
         }),
         ...mapGetters({
             hoursArray: 'slide/hoursArray'
-        })
+        }),
+        isUserOnPhone() {
+            return isMobile;
+        }
     },
     mounted() {
         this.setHourWeather(this.hourWeatherProp)
+        if(this.isUserOnPhone){
+            this.setAmountHours(5)
+            console.log('set')
+        }
+        else {
+            console.log('not set')
+        }
     }
 }
 </script>
@@ -105,11 +118,11 @@ button {
     }
 
     .one-hour {
-        font-size: 6px;
+        font-size: 9px;
     }
 
     img {
-        width: 2em;
+        width: 5em;
     }
 }
 </style>

@@ -95,6 +95,14 @@ button {
     height: 2.5rem;
 }
 
+button:hover {
+    background-color: rgb(117, 197, 106);
+}
+
+button:active {
+    background-color: rgb(61, 124, 53);
+}
+
 .hours-list-enter-active,
 .hours-list-leave-active {
     transition: all 0.2s linear;

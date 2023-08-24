@@ -4,7 +4,7 @@
         <div class="short-info">
             <img :src="fetchedWeather.icon" alt="weather icon" class="weather-icon">
         </div>
-        <p>{{ fetchedTemp }}</p>
+        <button class="temp" @click="tempClick"><span>{{ fetchedTemp }}</span></button>
         <p>{{ fetchedWeather.text }}</p>
         <p>{{ fetchedWeather.localtime }}</p>
     </div>
@@ -12,14 +12,17 @@
 
 <script>
 import CurrentWeather from '@/models/currentWeather';
+import tempMixin from '@/mixin/TempMixin'
 
 export default {
+    mixins: [tempMixin],
     props: {
         fetchedWeather: [CurrentWeather, undefined]
     },
     computed: {
         fetchedTemp() {
-            return this.fetchedWeather.temp_c + '°C'
+            if (this.isCelsius) return this.fetchedWeather.temp_c + '°C'
+            else return this.fetchedWeather.temp_f + '°F'
         }
     }
 }
@@ -33,7 +36,7 @@ export default {
 .container {
     display: flex;
     flex-direction: column;
-    row-gap: 1vh;
+    row-gap: 0.3em;
     color: wheat;
 }
 </style>

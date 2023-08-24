@@ -28,13 +28,15 @@ export const searchByLocsModule = {
                 localityWeather.location.name,
                 localityWeather.location.localtime,
                 localityWeather.current.temp_c,
+                localityWeather.current.temp_f,
                 localityWeather.current.condition.text,
                 localityWeather.current.condition.icon,
                 localityWeather.current.wind_kph,
                 localityWeather.current.wind_dir,
                 localityWeather.current.pressure_mb,
                 localityWeather.current.humidity,
-                localityWeather.current.feelslike_c
+                localityWeather.current.feelslike_c,
+                localityWeather.current.feelslike_f
                 )
         },
         setFoundLocalities(state, foundLocalities){

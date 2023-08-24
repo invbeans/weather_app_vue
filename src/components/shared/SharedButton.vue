@@ -12,12 +12,21 @@ export default {
 
 <style scoped lang="scss">
 button {
+    background-color: rgb(208, 170, 132);
     height: 3.5em;
     width: 10rem;
     min-width: fit-content;
     border: none;
     border-radius: 15px;
     padding: 1em 1.5rem;
+}
+
+button:hover {
+    background-color: rgb(236, 199, 162);
+}
+
+button:active {
+    background-color: rgb(148, 119, 89);
 }
 
 @media (max-width: 600px) and (orientation: portrait){

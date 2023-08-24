@@ -55,4 +55,40 @@ body {
     padding-right: 0;
   }
 }
+
+.temp {
+    border: none;
+    background: none;
+    width: fit-content;
+    transition: all 0.5s;
+    text-align: center;
+    cursor: pointer;
+    color: wheat;
+    font-size: 1em;
+}
+
+.temp span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.temp span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.temp:hover span {
+    padding-right: 15px;
+}
+
+.temp:hover span:after {
+    opacity: 1;
+    right: 0;
+}
 </style>

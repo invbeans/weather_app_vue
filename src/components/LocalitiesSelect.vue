@@ -48,4 +48,11 @@ option {
         width: 15rem;
     }
 }
+
+@media (max-width: 600px), (max-height: 600px){
+    select,
+    option {
+        font-size: 12px;
+    }
+}
 </style>

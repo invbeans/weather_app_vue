@@ -26,7 +26,14 @@ export default {
 
 @media (max-width: 600px) and (orientation: portrait){
     .weather-container {
-        padding: 1.2em 1.8em;
+        padding: 1.6em 1.8em;
+        min-height: 10rem;
+    }
+}
+
+@media (max-height: 900px) and (orientation: landscape) {
+    .weather-container {
+        padding: 1.8em 2.2em;
         min-height: 10rem;
     }
 }

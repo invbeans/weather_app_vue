@@ -125,4 +125,11 @@ button {
         width: 5em;
     }
 }
+
+@media (max-height: 900px) and (orientation: landscape) {
+    button {
+        width: 1.6em;
+        height: 3em;
+    }
+}
 </style>

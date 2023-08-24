@@ -167,4 +167,12 @@ export default {
     }
 
 }
+
+
+@media (max-height: 900px) and (orientation: landscape) {
+    .content-wrapper {
+        align-items: center;
+        padding-left: 0;
+    }
+}
 </style>

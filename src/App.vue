@@ -47,4 +47,12 @@ body {
     padding-right: 0;
   }
 }
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .app {
+    font-size: 12px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 </style>

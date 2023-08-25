@@ -17,7 +17,8 @@ export const searchByLocsModule = {
         localityWeather: undefined,
         foundLocalities: [],
         chosenLocality: undefined,
-        forecastWeather: undefined
+        forecastWeather: undefined,
+        isWeatherSearch: false
     }),
     mutations: {
         setSearchQuery(state, searchQuery) {
@@ -45,9 +46,14 @@ export const searchByLocsModule = {
         },
         setChosenLocality(state, chosenLocality){
             state.chosenLocality = chosenLocality
+            state.isWeatherSearch = true
         },
         setForecastWeather(state, forecastWeather){
             state.forecastWeather = forecastWeather
+            state.isWeatherSearch = false
+        },
+        setIsWeatherSearch(state, isWeatherSearch){
+            state.isWeatherSearch = isWeatherSearch
         }
     },
     actions: {
@@ -56,7 +62,7 @@ export const searchByLocsModule = {
                 weatherConfig.params.q = state.searchQuery
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/search.json', weatherConfig)
                 commit('setFoundLocalities', response.data)
-                weatherConfig.params = {}
+                this.setDefaultWeatherConfig()
             }
             catch (e) {
                 console.log(e)
@@ -67,7 +73,7 @@ export const searchByLocsModule = {
                 weatherConfig.params.q = state.chosenLocality.lat + "," +  state.chosenLocality.lon
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/current.json', weatherConfig)
                 commit('setLocalityWeather', response.data)
-                weatherConfig.params = {}
+                this.setDefaultWeatherConfig()
             }
             catch (e) {
                 console.log(e)
@@ -82,10 +88,21 @@ export const searchByLocsModule = {
                 weatherConfig.params.days = 3
                 const response = await axios.get('https://weatherapi-com.p.rapidapi.com/forecast.json', weatherConfig)
                 commit('setForecastWeather', response.data)
-                weatherConfig.params = {}
+                this.setDefaultWeatherConfig()
             }
             catch (e) {
                 console.log(e)
+            }
+        },
+        setDefaultWeatherConfig(){
+            weatherConfig = {
+                headers: {
+                    'X-RapidAPI-Key': process.env.VUE_APP_APIKEY,
+                    'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+                },
+                params: {
+                    q: ''
+                }
             }
         }
     },

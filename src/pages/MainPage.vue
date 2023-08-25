@@ -9,9 +9,13 @@
             <div class="found-localities">
                 <localities-select v-if="foundLocalities.length !== 0" @change:item="findByLatLong" :selectName="selectName"
                     :elements="foundLocalities"></localities-select>
+                <p v-else>Выберите населенный пункт...</p>
+            </div>
+            <div v-if="(localityWeather === undefined || forecastWeather === undefined) && isWeatherSearch === true">
+                <fulfilling-bouncing-circle-spinner :animation-duration="4000" :size="60" color="rgb(59, 196, 41)" />
             </div>
             <transition name="fade">
-                <div class="weather-blocks" v-if="localityWeather !== undefined">
+                <div class="weather-blocks" v-if="localityWeather !== undefined && forecastWeather !== undefined">
                     <shared-weather-block :imageURL='shortBlockBg'>
                         <short-weather :fetchedWeather="localityWeather">
                         </short-weather>
@@ -20,15 +24,17 @@
                         <detailed-weather :fetchedWeather="localityWeather">
                         </detailed-weather>
                     </shared-weather-block>
-                    <shared-weather-block :imageURL='forecastBlockBg' v-if="forecastWeather !== undefined">
+                    <shared-weather-block :imageURL='forecastBlockBg'
+                        v-if="forecastWeather !== undefined && localityWeather !== undefined">
                         <forecast-weather
                             :forecastWeather="forecastWeather.forecast.forecastday.slice(1)"></forecast-weather>
                     </shared-weather-block>
-                    <shared-weather-block class="col-span" v-if="forecastWeather !== undefined" :imageURL='hoursBlockBg'>
+                    <shared-weather-block class="col-span"
+                        v-if="forecastWeather !== undefined && localityWeather !== undefined" :imageURL='hoursBlockBg'>
                         <hour-weather :hourWeatherProp="forecastWeather.forecast.forecastday[0].hour"></hour-weather>
                     </shared-weather-block>
                 </div>
-                <p v-else>Выберите населенный пункт...</p>
+
             </transition>
         </div>
     </div>
@@ -41,6 +47,7 @@ import DetailedWeather from '@/components/DetailedWeather.vue';
 import LocalitiesSelect from '@/components/LocalitiesSelect.vue';
 import HourWeather from '@/components/HourWeather.vue';
 import ForecastWeather from '@/components/ForecastWeather.vue';
+import { FulfillingBouncingCircleSpinner } from 'epic-spinners'
 
 export default {
     components: {
@@ -48,7 +55,8 @@ export default {
         DetailedWeather,
         LocalitiesSelect,
         HourWeather,
-        ForecastWeather
+        ForecastWeather,
+        FulfillingBouncingCircleSpinner
     },
     data: () => ({
         selectName: "Выбор населенного пункта",
@@ -63,7 +71,8 @@ export default {
             setLocalityWeather: 'search/setLocalityWeather',
             setFoundLocalities: 'search/setFoundLocalities',
             setChosenLocality: 'search/setChosenLocality',
-            setForecastWeather: 'search/setForecastWeather'
+            setForecastWeather: 'search/setForecastWeather',
+            setIsWeatherSearch: 'search/setIsWeatherSearch'
         }),
         ...mapActions({
             searchWeatherByLatLong: 'search/searchWeatherByLatLong',
@@ -81,7 +90,8 @@ export default {
             searchQuery: state => state.search.searchQuery,
             localityWeather: state => state.search.localityWeather,
             foundLocalities: state => state.search.foundLocalities,
-            forecastWeather: state => state.search.forecastWeather
+            forecastWeather: state => state.search.forecastWeather,
+            isWeatherSearch: state => state.search.isWeatherSearch
         })
     }
 

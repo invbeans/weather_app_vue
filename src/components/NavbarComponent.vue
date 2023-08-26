@@ -19,6 +19,7 @@ export default {
     background-color: rgb(87, 160, 77);
     display: flex;
     align-items: center;
+    z-index: 2;
 }
 
 .navbar-container p {
